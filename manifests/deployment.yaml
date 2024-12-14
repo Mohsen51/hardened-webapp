@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 2  # Number of replicas for high availability
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: webapp
+          image: mohsen51/hardened-webapp:latest
+          ports:
+            - containerPort: 8080
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            
+            # Drop all capabilities and explicitly add only necessary ones (if any)
+            capabilities:
+              drop:
+                - ALL
