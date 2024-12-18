@@ -5,25 +5,27 @@ metadata:
   labels:
     app: webapp
 spec:
-  replicas: 2  # Number of replicas for high availability
+  replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: webapp
   template:
     metadata:
       labels:
-        app: nginx
+        app: webapp
     spec:
       containers:
         - name: webapp
-          image: mohsen51/hardened-webapp:latest
+          image: mohsen51/hardened-webapp:1.0.0
           ports:
             - containerPort: 8080
           securityContext:
+            # Run non-root
             privileged: false
+            # Disallow switch user
             allowPrivilegeEscalation: false
             
-            # Drop all capabilities and explicitly add only necessary ones (if any)
+            # Drop all capabilities
             capabilities:
               drop:
                 - ALL

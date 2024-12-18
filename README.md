@@ -5,6 +5,7 @@ This repository contains a Dockerfile that exposes a static `index.html` using N
 ## Prerequisites
 
 - A Kubernetes cluster. In this example, we use [kind](https://kind.sigs.k8s.io/) to deploy a local Kubernetes cluster.
+- A self signed certificate : `mkdir certs && openssl req -x509 -subj '/CN=localhost' -nodes -days 365 -newkey rsa:4096 -keyout certs/server.key -out certs/server.crt`
 
 ## Setup
 

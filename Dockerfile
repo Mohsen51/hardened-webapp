@@ -6,6 +6,11 @@ COPY nginx-conf/default.conf /etc/nginx/conf.d/
 
 COPY index.html /usr/share/nginx/html/
 
+COPY certs/server.crt /etc/nginx/certs/server.crt
+
+COPY certs/server.key /etc/nginx/certs/server.key
+
+# Create the directories that 
 RUN mkdir /var/cache/nginx/client_temp && \
   mkdir /var/cache/nginx/proxy_temp && \
   mkdir /var/cache/nginx/fastcgi_temp && \
@@ -13,13 +18,12 @@ RUN mkdir /var/cache/nginx/client_temp && \
   mkdir /var/cache/nginx/scgi_temp && \
   chown -R nginx /var/cache/nginx && \
   chown -R nginx /etc/nginx/ && \
-  chmod -R 755 /etc/nginx/ && \
   chown -R nginx /var/log/nginx
 
 RUN touch /var/run/nginx.pid && \
   chown -R nginx /var/run/nginx.pid /run/nginx.pid
 
-EXPOSE 8080
+EXPOSE 8443
 
 USER nginx
 
