@@ -24,8 +24,18 @@ spec:
             privileged: false
             # Disallow switch user
             allowPrivilegeEscalation: false
-            
+            runAsNonRoot: true
+            runAsUser: 101
+            runAsGroup: 101
             # Drop all capabilities
             capabilities:
               drop:
                 - ALL
+            seccompProfile:
+              type: RuntimeDefault
+      # Ensure host network is not used
+      hostNetwork: false
+      # Prevent sharing the host process ID namespace
+      hostPID: false
+       # Prevent sharing the host IPC namespace 
+      hostIPC: false
