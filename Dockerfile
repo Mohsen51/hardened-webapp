@@ -23,6 +23,18 @@ RUN mkdir /var/cache/nginx/client_temp && \
 RUN touch /var/run/nginx.pid && \
   chown -R nginx /var/run/nginx.pid /run/nginx.pid
 
+# Further alpine linux hardening
+RUN rm -rf /sbin/apk && \
+  rm -rf /usr/bin/wget && \
+  rm -rf /bin/su && \
+  rm -rf /bin/ln && \
+  rm -rf /bin/chmod && \
+  rm -rf /bin/chgrp && \
+  rm -rf /bin/chown && \
+  rm -rf /etc/crontabs && \
+  rm -rf /etc/periodic && \
+  rm -rf /var/spool/cron
+
 EXPOSE 8443
 
 USER nginx
